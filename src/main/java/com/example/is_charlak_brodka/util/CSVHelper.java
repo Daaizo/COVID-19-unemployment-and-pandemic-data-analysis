@@ -26,7 +26,7 @@ public class CSVHelper {
                 String country = key.split("_")[0];
                 String month = key.split("_")[1];
                 String year = key.split("_")[2];
-                graphDataList.add(new GraphData(null, month, year, country, doubles.get(0), doubles.get(1)));
+                graphDataList.add(new GraphData(null, Integer.parseInt(month), Integer.parseInt(year), country, doubles.get(0), doubles.get(1)));
             }
         });
         return graphDataList;

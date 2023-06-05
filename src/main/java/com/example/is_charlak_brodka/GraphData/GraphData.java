@@ -15,8 +15,8 @@ public class GraphData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String month;
-    private String year;
+    private Integer month;
+    private Integer year;
 
     @Column(name = "country_code")
     private String countryCode;
