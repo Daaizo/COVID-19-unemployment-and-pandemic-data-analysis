@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface GraphDataRepository extends JpaRepository<GraphData, Long> {
     List<GraphData> findByCountryCodeOrderByYearAscMonthAsc(String countryCode);
+    List<GraphData> findAllByOrderByCountryCodeAscYearAscMonthAsc();
 
     List<GraphData> findByYearBetweenOrderByYearAscMonthAsc(Integer startYear, Integer endYear);
 

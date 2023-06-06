@@ -11,7 +11,7 @@ public class GraphDataService {
     private final GraphDataRepository graphDataRepository;
 
     public List<GraphData> getAllData() {
-        return graphDataRepository.findAll();
+        return graphDataRepository.findAllByOrderByCountryCodeAscYearAscMonthAsc();
     }
 
     public List<GraphData> getAllDataBetween(Integer endYear, Integer startYear) {

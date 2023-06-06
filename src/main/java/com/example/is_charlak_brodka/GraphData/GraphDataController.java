@@ -1,6 +1,6 @@
 package com.example.is_charlak_brodka.GraphData;
 
-import com.thoughtworks.xstream.XStream;
+import com.example.is_charlak_brodka.util.XMLParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,30 +20,29 @@ public class GraphDataController {
 
     @GetMapping()
     public ResponseEntity<List<GraphData>> getGraphData(@RequestParam(required = false) String countryCode,
-                                                        @RequestParam(required = false) Integer yearStart, @RequestParam(required = false) Integer yearEnd) {
-
-        if (yearStart != null && yearEnd != null) {
-            if (countryCode != null) {
-                return ResponseEntity.ok(graphDataService.getAllDataFromCountryBetween(countryCode, yearEnd, yearStart));
-            }
-            return ResponseEntity.ok(graphDataService.getAllDataBetween(yearEnd, yearStart));
-        }
-        if (countryCode != null) {
-            return ResponseEntity.ok(graphDataService.getAllDataFromCountry(countryCode));
-        }
-        return ResponseEntity.ok(graphDataService.getAllData());
+                                                        @RequestParam(required = false) Integer yearStart,
+                                                        @RequestParam(required = false) Integer yearEnd) {
+        return ResponseEntity.ok(getListOfGraphDataBasedOnParameters(countryCode, yearStart, yearEnd));
     }
 
     @GetMapping(value = "/xml", produces = "application/xml")
-    public ResponseEntity<String> getGraphDataXML(@RequestParam(required = false) String countryCode) {
-        XStream xstream = new XStream();
-        xstream.alias("graphData", GraphData.class);
-        if (countryCode != null) {
-            List<GraphData> allDataFromCountry = graphDataService.getAllDataFromCountry(countryCode);
-            return ResponseEntity.ok(xstream.toXML(allDataFromCountry));
-        }
-        List<GraphData> allData = graphDataService.getAllData();
-        return ResponseEntity.ok(xstream.toXML(allData));
+    public ResponseEntity<String> getGraphDataXML(@RequestParam(required = false) String countryCode,
+                                                  @RequestParam(required = false) Integer yearStart,
+                                                  @RequestParam(required = false) Integer yearEnd) {
+        List<GraphData> listOfGraphDataBasedOnParameters = getListOfGraphDataBasedOnParameters(countryCode, yearStart, yearEnd);
+        return ResponseEntity.ok(XMLParser.getGraphDataAsXML(listOfGraphDataBasedOnParameters));
     }
 
+    private List<GraphData> getListOfGraphDataBasedOnParameters(String countryCode, Integer yearStart, Integer yearEnd) {
+        if (yearStart != null && yearEnd != null) {
+            if (countryCode != null) {
+                return graphDataService.getAllDataFromCountryBetween(countryCode, yearEnd, yearStart);
+            }
+            return graphDataService.getAllDataBetween(yearEnd, yearStart);
+        }
+        if (countryCode != null) {
+            return graphDataService.getAllDataFromCountry(countryCode);
+        }
+        return graphDataService.getAllData();
+    }
 }
