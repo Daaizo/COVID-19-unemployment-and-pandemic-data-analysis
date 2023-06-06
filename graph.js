@@ -26,6 +26,8 @@ async function test() {
     startDate = $('#startDate')[0].value;
     endDate = $('#endDate')[0].value;
 
+    document.getElementById("charts").style.visibility = "visible";
+
     await $.ajax({
         url: "http://localhost:8080/graphData?yearStart="+startDate+"&yearEnd="+endDate+"&countryCode="+region1,
         type: 'GET',
