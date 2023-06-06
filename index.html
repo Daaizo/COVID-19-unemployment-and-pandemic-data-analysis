@@ -13,11 +13,11 @@
         }
     </style>
 </head>
-<body class="text-center text-light bg-dark">
+<body class="text-center text-light bg-dark" onload="loadData()">
 <div class="container mt-3">
 <div class="row">
 
-    <div class="col-sm"><label for="region1">Wybierz region 1:</label>
+    <div class="col"><label for="region1">Wybierz region 1:</label>
         <select id="region1" class="text-light bg-dark" name="region1">
             <option value="PL">Polska</option>
             <option value="DE">Niemcy</option>
@@ -35,7 +35,7 @@
         </select>
     </div>
 
-    <div class="col-sm"><label for="region2">Wybierz region 2:</label>
+    <div class="col"><label for="region2">Wybierz region 2:</label>
         <select id="region2" class="text-light bg-dark" name="region2">
             <option value="PL">Polska</option>
             <option value="DE">Niemcy</option>
@@ -52,9 +52,29 @@
             <option value="DK">Dania</option>
         </select>
     </div>
+        <div class="col"><label for="startDate">Rok początkowy:</label>
+        <select id="startDate" class="text-light bg-dark" name="startDate">
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+        </select></div>
+        <div class="col"><label for="endDate">Rok końcowy:</label>
+        <select id="endDate" class="text-light bg-dark" name="endDate">
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+        </select></div>
 </div>
-<div>
-        <button onclick="test()" type="button" class="btn btn-primary btn-lg btn-block">Generuj wykresy</button>
+<div class="row">
+    <div class="col mt-3">
+        <button onclick="test()" type="button" class="btn btn-danger">Wygeneruj wykresy</button>
+    </div><div class="col mt-3">
+        <a id="exportJSONFull" onclick="exportJsonFull(this)" class="btn btn-danger">Pobierz wszystkie dane jako JSON</a>
+    </div><div class="col mt-3">
+        <a id="exportXML2" onclick="exportXMLFull(this)" class="btn btn-danger">Pobierz wszystkie dane jako XML</a>
+    </div>
 </div>
     <h3 id="region1header">Wykres dla regionu 1: </h3>
 
@@ -62,14 +82,16 @@
         <canvas id="chart1" style="width:100%;max-width:700px"></canvas>
     </div>
 
-    <a id="exportJSON1" onclick="exportJsonRegion1(this)" class="btn btn-warning">Download JSON</a>
+    <a id="exportJSON1" onclick="exportJsonRegion1(this)" class="btn btn-warning">Pobierz dane jako JSON</a>
+    <a id="exportXML1" onclick="exportXMLRegion1(this)" class="btn btn-warning">Pobierz dane jako XML</a>
 
     <h3 id="region2header">Wykres dla regionu 2: </h3>
     <div id="canvas2">
         <canvas id="chart2" style="width:100%;max-width:700px"></canvas>
     </div>
 
-    <a id="exportJSON2" onclick="exportJsonRegion2(this)" class="btn btn-warning">Download JSON</a>
+    <a id="exportJSON2" onclick="exportJsonRegion2(this)" class="btn btn-warning">Pobierz dane jako JSON</a>
+    <a id="exportXML2" onclick="exportXMLRegion2(this)" class="btn btn-warning">Pobierz dane jako XML</a>
 </div>
 </body>
 </html>
