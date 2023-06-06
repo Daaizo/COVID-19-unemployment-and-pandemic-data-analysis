@@ -58,7 +58,6 @@ public class CSVHelper {
 
             Map<String, Double> data = new HashMap<>();
             for (CSVRecord csvRecord : csvParser) {
-                System.out.println("csvRecord = " + csvRecord);
                 String location = csvRecord.get(CovidDataHeaders.Country_code);
                 String time = csvRecord.get(CovidDataHeaders.Date_reported);
                 String value = csvRecord.get(CovidDataHeaders.New_cases);
@@ -90,7 +89,6 @@ public class CSVHelper {
              CSVParser csvParser = new CSVParser(reader, csvFormat)) {
             Map<String, Double> data = new HashMap<>();
             for (CSVRecord csvRecord : csvParser) {
-                System.out.println("csvRecord = " + csvRecord);
                 String location = csvRecord.get(UnemploymentDataHeaders.LOCATION);
                 String time = csvRecord.get(UnemploymentDataHeaders.TIME);
                 String value = csvRecord.get(UnemploymentDataHeaders.Value);
@@ -98,7 +96,6 @@ public class CSVHelper {
                 String year = time.split("-")[0];
                 String key = location + "_" + month + "_" + year;
                 data.put(key, data.getOrDefault(key, 0.00) + Double.parseDouble(value));
-
             }
             return data;
 
