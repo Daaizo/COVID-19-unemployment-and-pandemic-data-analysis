@@ -5,7 +5,6 @@ async function loadData(){
         url: "http://localhost:8080/graphData",
         type: 'GET',
         success: function(res) {
-            console.log(res)
             jsonFull = res;
         }});
 
@@ -13,7 +12,6 @@ async function loadData(){
         url: "http://localhost:8080/graphData/xml",
         type: 'GET',
         success: function(res) {
-            console.log(res);
             xmlFull = res;
         }});
 }
@@ -32,7 +30,6 @@ async function test() {
         url: "http://localhost:8080/graphData?yearStart="+startDate+"&yearEnd="+endDate+"&countryCode="+region1,
         type: 'GET',
         success: function(res) {
-            console.log(res);
 
             json1 = res;
             res.sort(function(a,b){
@@ -161,7 +158,6 @@ async function test() {
             url: "http://localhost:8080/graphData/xml?yearStart="+startDate+"&yearEnd="+endDate+"&countryCode="+region1,
             type: 'GET',
             success: function(res) {
-                console.log(res);
                 xml1 = res;
             }
     });
@@ -169,7 +165,6 @@ async function test() {
         url: "http://localhost:8080/graphData/xml?yearStart="+startDate+"&yearEnd="+endDate+"&countryCode="+region2,
         type: 'GET',
         success: function(res) {
-            console.log(res);
             xml2 = res;
         }
     });
