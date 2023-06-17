@@ -7,7 +7,6 @@ import com.example.is_charlak_brodka.users.User;
 import com.example.is_charlak_brodka.users.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -41,15 +40,14 @@ public class AuthenticationService {
                 .build();
     }
 
-    public TokenResponse authenticate(Login request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),
-                request.getPassword()));
+    public TokenResponse login(Login request) {
         User user = repository.findUserByEmail(request.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("user with given email not found"));
         String jwtToken = jwtService.generateToken(user);
         jwtService.generateToken(user);
         return TokenResponse.builder()
                 .jwtToken(jwtToken)
+                .role(user.getRole())
                 .build();
     }
 }

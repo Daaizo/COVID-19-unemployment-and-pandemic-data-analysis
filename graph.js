@@ -1,9 +1,13 @@
 let json1, json2, region1, region2, startDate, endDate, xml1, xml2, jsonFull, xmlFull;
 async function loadData(){
-
+    var token = localStorage.getItem("token");
     $.ajax({
         url: "http://localhost:8080/graphData",
         type: 'GET',
+        contentType: "application/json",
+        headers: {
+            'Authorization': 'Bearer ' + token
+        },
         success: function(res) {
             jsonFull = res;
         }});
@@ -11,12 +15,16 @@ async function loadData(){
     await $.ajax({
         url: "http://localhost:8080/graphData/xml",
         type: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token
+        },
         success: function(res) {
             xmlFull = res;
         }});
 }
 
 async function test() {
+    var token = localStorage.getItem("token");
     let xValues = [];
     let yValues1 = [];
     let yValues2 = [];
@@ -31,6 +39,9 @@ async function test() {
     await $.ajax({
         url: "http://localhost:8080/graphData?yearStart="+startDate+"&yearEnd="+endDate+"&countryCode="+region1,
         type: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token
+        },
         success: function(res) {
 
             json1 = res;
@@ -96,6 +107,9 @@ async function test() {
     await $.ajax({
         url: "http://localhost:8080/graphData?yearStart="+startDate+"&yearEnd="+endDate+"&countryCode="+region2,
         type: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token
+        },
         success: function(res) {
             json2 = res;
             res.sort(function(a,b){
@@ -159,6 +173,9 @@ async function test() {
         await $.ajax({
             url: "http://localhost:8080/graphData/xml?yearStart="+startDate+"&yearEnd="+endDate+"&countryCode="+region1,
             type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            },
             success: function(res) {
                 xml1 = res;
             }
@@ -166,6 +183,9 @@ async function test() {
         await $.ajax({
         url: "http://localhost:8080/graphData/xml?yearStart="+startDate+"&yearEnd="+endDate+"&countryCode="+region2,
         type: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token
+        },
         success: function(res) {
             xml2 = res;
         }

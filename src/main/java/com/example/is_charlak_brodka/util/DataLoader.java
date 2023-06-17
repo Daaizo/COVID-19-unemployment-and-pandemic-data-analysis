@@ -8,6 +8,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -16,7 +17,10 @@ public class DataLoader implements ApplicationRunner {
     private final GraphDataService graphDataService;
 
     public void run(ApplicationArguments args) {
-        ArrayList<GraphData> graphData = CSVHelper.initData();
-        graphDataService.insertAll(graphData);
+        List<GraphData> allData = graphDataService.getAllData();
+        if (allData == null) {
+            ArrayList<GraphData> graphData = CSVHelper.initData();
+            graphDataService.insertAll(graphData);
+        }
     }
 }

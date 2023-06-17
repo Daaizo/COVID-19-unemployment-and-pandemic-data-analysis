@@ -32,7 +32,7 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> login(@RequestBody Login request) {
-        return ResponseEntity.ok(service.authenticate(request));
+        return ResponseEntity.ok(service.login(request));
     }
 
 }
