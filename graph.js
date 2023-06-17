@@ -190,6 +190,145 @@ async function test() {
             xml2 = res;
         }
     });
+    let xValuesRegion2;
+    let yValues1Region2;
+    let yValues2Region2;
+    await $.ajax({
+        url: "http://localhost:8080/graphData?yearStart="+startDate+"&yearEnd="+endDate+"&countryCode="+region1,
+        type: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token
+        },
+        success: function(res) {
+            json2 = res;
+            res.sort(function(a,b){
+                return a.year - b.year || a.month - b.month;
+            })
+            xValuesRegion2 = [];
+            yValues1Region2 = [];
+            yValues2Region2 = [];
+            for(let i = 0; i<res.length; i++) {
+                xValuesRegion2.push(res[i]["month"] + '-' + res[i]["year"]);
+                yValues1Region2.push(res[i]["totalNumberOfCases"]);
+                yValues2Region2.push(res[i]["unemploymentPercentValue"]);
+            }
+
+        }
+    });
+    let maxCovidRegion1 = Math.max.apply(Math, yValues1)
+    let maxCovidRegion2 = Math.max.apply(Math, yValues1Region2)
+    let maxCovid = maxCovidRegion1 > maxCovidRegion2 ? maxCovidRegion1 : maxCovidRegion2;
+    let maxUnemploymentRegion1 = Math.max.apply(Math, yValues2)
+    let maxUnemploymentRegion2 = Math.max.apply(Math, yValues2Region2)
+    let maxUnemployment = maxUnemploymentRegion1 > maxUnemploymentRegion2 ? maxUnemploymentRegion1 : maxUnemploymentRegion2;
+    $('#canvas3')[0].innerHTML = ''
+    $('#canvas3')[0].innerHTML = '<canvas id="chart3" style="width:100%;max-width:700px"></canvas>'
+    $('#region3header')[0].innerHTML = 'Wykres połączony - stopa bezrobocia dla obu regionów: '+region2 + ' ' + region1
+
+    new Chart("chart3", {
+        type: "line",
+        data: {
+            labels: xValues, datasets: [{
+                label: 'Unemployment percentage ' + region2,
+                data: yValues2,
+                borderColor: "green",
+                fill: false,
+            }, {
+                label: 'Unemployment percentage ' + region1,
+                data: yValues2Region2,
+                borderColor: "black",
+                fill: false,
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        max: maxUnemployment,
+                        min: 0
+                    }
+                    , position: 'left',
+                    type: 'linear'
+                },
+                ]
+            }
+        }
+    });
+    $('#canvas4')[0].innerHTML = ''
+    $('#canvas4')[0].innerHTML = '<canvas id="chart4" style="width:100%;max-width:700px"></canvas>'
+    $('#region4header')[0].innerHTML = 'Wykres połączony - przypadki covid dla obu regionów: '+region2 + ' ' + region1
+
+    new Chart("chart4", {
+        type: "line",
+        data: {
+            labels: xValues, datasets: [{
+                label: 'Monthly number of covid cases ' + region2, data: yValues1, borderColor: "red", fill: false,
+            },
+                {
+                    label: 'Monthly number of covid cases '  + region1, data: yValues1Region2, borderColor: "blue", fill: false,
+                }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        max: maxCovid,
+                        min: 0
+                    }
+                    , position: 'left',
+                    type: 'linear'
+                },
+                ]
+            }
+        }
+    });
+
+    $('#canvas5')[0].innerHTML = ''
+    $('#canvas5')[0].innerHTML = '<canvas id="chart5" style="width:100%;max-width:700px"></canvas>'
+    $('#region5header')[0].innerHTML = 'Wykres dla połączonych regionów '+region2 + ' ' + region1
+
+    new Chart("chart5", {
+        type: "line",
+        data: {
+            labels: xValues, datasets: [{
+                label: 'Monthly number of covid cases ' + region2, yAxisID: 'A', data: yValues1, borderColor: "red", fill: false,
+            }, {
+                label: 'Unemployment percentage ' + region2, yAxisID: 'B', data: yValues2, borderColor: "green", fill: false,
+            },
+                {
+                    label: 'Monthly number of covid cases '  + region1,yAxisID: 'A',  data: yValues1Region2, borderColor: "blue", fill: false,
+                }, {
+                    label: 'Unemployment percentage '  + region1 , yAxisID: 'B',data: yValues2Region2, borderColor: "black", fill: false,
+                }
+            ]
+        },
+        options:{
+            scales: {
+                yAxes : [{
+                    id: 'A',
+                    ticks : {
+                        max : maxCovid+ 5000,
+                        min : 0
+                    }
+                    , position: 'left',
+                    type: 'linear'
+                },
+                    {
+                        id: 'B',
+                        ticks: {
+                            min: 1,
+                            max :maxUnemployment + 5
+                        }
+                        ,
+                        position: 'right',
+                        type: 'linear'
+                    }
+
+                ]
+            }
+        }
+    });
 
 }
 function exportJsonRegion1(el) {
