@@ -20,3 +20,6 @@ Dodatkowo w głównym folderze projektu został dodany krótki film przedstawiaj
 Backend: Spring, Spring Boot, ORM, JWT, REST - Java w wersji 17
 baza danych: mysql
 frontend: jquery + chart.js
+# Prezentacja nowych zmiany logowanie, rejestra, JWT + nowe wykresy
+https://github.com/Daaizo/IS_CHARLAK_BRODKA/assets/84875747/5b3e233c-f976-4f6c-a202-b1c610874436
+
