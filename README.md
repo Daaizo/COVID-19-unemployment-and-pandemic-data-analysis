@@ -1,10 +1,10 @@
 # IS_CHARLAK_BRODKA 
 Projekt zaliczeniowy Daniel Charlak, Maciej Bródka grupa IO6.2
-temat 5 : Zestawienie różnych danych statystycznych przed wybuchem pandemii COVID-19
+## temat 5 : Zestawienie różnych danych statystycznych przed wybuchem pandemii COVID-19
 (przed 03.2020 r.) oraz w czasie jej trwania (po 03.2020 r.), prezentacja zmian
 wartości w wybranym okresie
 
-# Opis projketu
+# Opis projektu
 Projekt przedstawia dane dotyczące bezrobocia i zarażeń covid dla krajów : 
 Polska, Niemcy, Włochy, Czechy, Francja, Stany Zjednoczone, Turcja, Węgry, Grecja, Hiszpania, Holandia, Finlandia, Dania w okresie czasu 2020:2023 z podziałem na miesiące.
 Dane mogą zostać użyte do analizy i wyciągniecia wniosków dotyczące korelacji lub jej braku pomiędzy pandemią, a bezrobociem w wybranym kraju i okresie czasu.
