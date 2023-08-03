@@ -1,6 +1,4 @@
-# IS_CHARLAK_BRODKA 
-Projekt zaliczeniowy Daniel Charlak, Maciej Bródka grupa IO6.2
-## temat 5 : Zestawienie różnych danych statystycznych przed wybuchem pandemii COVID-19
+#Zestawienie różnych danych statystycznych przed wybuchem pandemii COVID-19
 (przed 03.2020 r.) oraz w czasie jej trwania (po 03.2020 r.), prezentacja zmian
 wartości w wybranym okresie
 
