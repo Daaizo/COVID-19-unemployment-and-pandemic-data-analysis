@@ -1,4 +1,4 @@
-# Zestawienie różnych danych statystycznych przed wybuchem pandemii COVID-19
+# Zestawienie różnych danych statystycznych przed i po wybuchu pandemii COVID-19  [Java 17, Spring, JWT, Rest, JQuery].
 (przed 03.2020 r.) oraz w czasie jej trwania (po 03.2020 r.), prezentacja zmian
 wartości w wybranym okresie
 
